@@ -1,0 +1,4 @@
+# Ignore vars config files
+
+terraform.tfvars
+*.auto.tfvars
