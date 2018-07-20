@@ -15,7 +15,7 @@ terraform {
 # ---------------------------------------------------------------------------------------------------------------------
 
 module "servers" {
-  source = "git::git@github.com:hashicorp/terraform-google-consul.git//modules/consul-cluster?ref=v0.0.1"
+  source = "modules/server-cluster"
 
   gcp_zone = "${var.gcp_zone}"
 
@@ -60,8 +60,8 @@ data "template_file" "startup_script_server" {
   template = "${file("${path.module}/scripts/startup-script-server.sh")}"
 
   vars {
-    num_servers                    = "${var.server_cluster_size}"
-    consul_server_cluster_tag_name = "${var.server_cluster_name}"
+    num_servers             = "${var.server_cluster_size}"
+    server_cluster_tag_name = "${var.server_cluster_name}"
   }
 }
 

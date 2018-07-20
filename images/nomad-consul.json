@@ -4,7 +4,6 @@
       "project_id": null,
       "zone": null,
       "nomad_version": "0.6.3",
-      "consul_module_version": "v0.0.1",
       "consul_version": "0.9.3"
     },
     "builders": [{
@@ -18,13 +17,13 @@
     }],
     "provisioners": [{
       "type": "file",
-      "source": "{{template_dir}}/../../../terraform-google-nomad",
+      "source": "{{template_dir}}/..",
       "destination": "/tmp",
       "pause_before": "30s"
     },{
       "type": "shell",
       "inline": [
-        "/tmp/terraform-google-nomad/modules/install-nomad/install-nomad --version {{user `nomad_version`}}"
+        "/tmp/modules/install-nomad/install-nomad --version {{user `nomad_version`}}"
       ]
     },{
       "type": "shell",
@@ -34,8 +33,7 @@
     },{
       "type": "shell",
       "inline": [
-        "git clone --branch {{user `consul_module_version`}} https://github.com/hashicorp/terraform-google-consul.git /tmp/terraform-google-consul",
-        "/tmp/terraform-google-consul/modules/install-consul/install-consul --version {{user `consul_version`}}"
+        "/tmp/modules/install-consul/install-consul --version {{user `consul_version`}}"
       ]
     }]
   }
